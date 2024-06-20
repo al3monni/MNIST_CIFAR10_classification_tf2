@@ -27,7 +27,7 @@ Updated by Dott.Alessandro Monni, UNISS
    </td>
  </tr>
  <tr>
- <td align="center"><h3>MNIST and CIFAR-10 Classification using Vitis AI 3.5 and TF 2.16</h3>
+ <td align="center"><h3>MNIST and CIFAR-10 Classification using Vitis AI 3.5 and TensorFlow 2.16</h3>
  </td>
  </tr>
 </table>
