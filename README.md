@@ -228,3 +228,75 @@ sudo ./docker_build.sh -t gpu -f tf2
 ```
 
 For troubleshooting and more information, refer to the [Vitis AI documentation](https://xilinx.github.io/Vitis-AI/3.5/html/index.html).
+
+
+## Implementation
+
+Clone or download this GitHub repository to your local machine where you have installed the necessary tools.
+
+```shell
+git clone https://github.com/al3monni/MNIST_CIFAR10_classification_tf2.git
+```
+
+Open terminal, cd into the ``repository`` folder, then into the ``files`` folder. Start the Vitis AI™ docker.
+
+```shell
+# navigate to tutorial folder
+cd <path_to_tutorial>/files
+
+# to start GPU docker
+./docker_run.sh xilinx/vitis-ai-gpu:latest
+```
+
+The docker container will start and you should see something like this in the terminal:
+
+```shell
+INSERT OUTPUT HERE
+```
+
+The complete tools flow can be run just by executing the `source run_all.sh` command, or by running each of the steps in order (from `0_setenv.sh` to `3_make_target.sh`):
+
+```shell
+$ source ./0_setenv.sh
+$ source ./1_train.sh
+$ source ./2_compile.sh
+$ source ./3_make_target.sh
+```
+
+## Running the Application on the Kria KV260 platform and ZCU102 Board
+
+The `7_make_target.sh` script copies all the required files for running on the Kria KV260 platform and the ZCU102 board into the `files/build/target_kv260` and `files/build/target_zcu102` folders, respectively. Additionally, it copies the test set images to `files/build/target_kv260/images` and `files/build/target_zcu102/images` - the application code will preprocess and classify these images. The entire target_kv260 folder needs to be copied to the KV260 SD card, and the entire target_zcu102 folder needs to be copied to the ZCU102 SD card.
+
+You can directly copy the entire `files/build/target_zcu102` and `files/build/target_kv260` folders to the `/home/root` folder of the respective flashed SD cards. Connect the flashed SD card to your host machine, and when it is recognized you will see two volumes, BOOT and ROOTFS. Navigate into the ROOTFS and then into the /home folder.  Make the ./root folder writeable by issuing the command ``sudo chmod -R 777 root`` and then copy the entire `files/build/target_zcu102` or `files/build/target_kv260` folder from the host machine to the `/home/root` folder on the respective SD card. Then unmount both the BOOT and ROOTFS volumes from the host machine and then eject the SD Card.
+
+After this step plug the SD card into KV260 platform or ZCU102 board and then connect to the platform/board through UART or SSH connection. You can start the application by navigating into the target_kv260 or target_zcu102 folder (`cd target_zcu102` or `cd target_kv260`) and then issuing the command ``python3 app_mt.py``. The application starts, and after a few seconds, shows the throughput (in frames/sec) and the accuracy:
+
+```shell
+root@xilinx-zcu102-2021_1:~ cd target_zcu102
+root@xilinx-zcu102-2021_1:~/target_zcu102# python3 app_mt.py
+Command line options:
+ --image_dir :  images
+ --threads   :  1
+ --model     :  model_dir/customcnn.xmodel
+Pre-processing 10000 images...
+Starting 1 threads...
+Throughput=3644.82 fps, total frames = 10000, time=2.7436 seconds
+Correct:9857, Wrong:143, Accuracy:0.9857
+```
+
+For better throughput, the number of threads can be increased by using the `-t` option. For example, to execute with four threads:
+
+```shell
+root@xilinx-zcu102-2021_1:~/target_zcu102# python3 app_mt.py -t 4
+Command line options:
+ --image_dir :  images
+ --threads   :  4
+ --model     :  model_dir/customcnn.xmodel
+Pre-processing 10000 images...
+Starting 4 threads...
+Throughput=5224.95 fps, total frames = 10000, time=1.9139 seconds
+Correct:9857, Wrong:143, Accuracy:0.9857
+```
+
+</hr>
+<p align="center"><sup>Copyright&copy; 2020-2022 Xilinx, Updated by Alessandro Monni, UNISS</sup></p>
