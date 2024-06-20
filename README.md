@@ -23,18 +23,18 @@ Updated by Dott.Alessandro Monni, UNISS
 
 <table>
  <tr>
-   <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>Vitis AI Tutorials</h1>
+   <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>Vitis AI™ Tutorials</h1>
    </td>
  </tr>
  <tr>
- <td align="center"><h3>MNIST and CIFAR-10 Classification using Vitis AI 3.5 and TensorFlow 2.16</h3>
+ <td align="center"><h3>MNIST and CIFAR-10 Classification using Vitis AI™ 3.5 and TensorFlow 2.16</h3>
  </td>
  </tr>
 </table>
 
 ### Current status
 
-+ Tested with Vitis AI&trade; 3.5 and TensorFlow 2.16
++ Tested with Vitis AI™ 3.5 and TensorFlow 2.16
 + Tested on the following platforms: ZCU102, Kria KV260
 
 
@@ -98,11 +98,11 @@ The host machine must meet several requirements:
 
 + Ubuntu 20.04 or later
 + At least 100GB of free disk space
-+ A CPU or GPU version of the Vitis AI docker
++ A CPU or GPU version of the Vitis AI™ docker
 
 NVIDIA GPU (<= CUDA 11.8) is recommended.
 
-For detailed system requirements and installation instructions, refer to the [Vitis AI documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
+For detailed system requirements and installation instructions, refer to the [Vitis AI™ documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
 
 Step 1: Install Docker Engine on Ubuntu
 
@@ -147,7 +147,7 @@ For more information, refer to the [Docker installation guide](https://docs.dock
 
 Step 2: Install CUDA
 
-The following steps referred to hosts with NVIDIA GPU, for a CPU or ROCm installation refer to the [Vitis AI documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
+The following steps referred to hosts with NVIDIA GPU, for a CPU or ROCm installation refer to the [Vitis AI™ documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
 
 For NVIDIA GPUs, ensure NVIDIA drivers and the Container Toolkit are correctly installed:
 
@@ -211,13 +211,13 @@ For more information, see the [NVIDIA drivers installation guide](https://ubuntu
 
 Step 3: Vitis AI installation
 
-1. Clone the Vitis AI repository:
+1. Clone the Vitis AI™ repository:
 
 ```shell
 git clone https://github.com/Xilinx/Vitis-AI
 ```
 
-2. Build the Vitis AI container:
+2. Build the Vitis AI™ container:
 
 ```shell
 # Navigate to the docker subdirectory in the Vitis AI install path
