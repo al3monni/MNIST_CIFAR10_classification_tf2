@@ -233,7 +233,7 @@ cd <Vitis-AI install path>/Vitis-AI/docker
 2. Build the Tensorflow2 GPU container:
 
 ```shell
-./docker_build.sh -t gpu -f tf2
+sudo ./docker_build.sh -t gpu -f tf2
 ```
 
 Per qualsiasi problema e maggiori informazioni consultare: [Vitis™ AI 3.5 documentation
