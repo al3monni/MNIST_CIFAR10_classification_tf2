@@ -299,4 +299,4 @@ Correct:9857, Wrong:143, Accuracy:0.9857
 ```
 
 </hr>
-<p align="center"><sup>Copyright&copy; 2020-2022 Xilinx, Updated by Alessandro Monni, UNISS</sup></p>
+<p align="center"><sup>Copyright&copy; 2020-2022 Xilinx, Updated by Dott.Alessandro Monni, UNISS</sup></p>
