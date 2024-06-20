@@ -40,7 +40,7 @@ Updated by Dott.Alessandro Monni, UNISS
 
 ## Introduction
 
-This repository update of the official [AMD Vitis AI™ tutorial](https://github.com/Xilinx/Vitis-AI-Tutorials/blob/1.4/Design_Tutorials/02-MNIST_classification_tf) designed to guide new users through the Vitis AI development flow (using Tensorflow) that accelerate convolutional neural networks (CNNs) and deploy them on AMD development platforms for inference (prediction). The updates bring the tools to the latest version (2024), making the flow simple and faster and enabling classification to the CIFAR-10 dataset.
+This repository update of the official [AMD Vitis AI™ tutorial](https://github.com/Xilinx/Vitis-AI-Tutorials/blob/1.4/Design_Tutorials/02-MNIST_classification_tf). It guides users through the Vitis AI development flow (using Tensorflow), accelerating convolutional neural networks (CNNs) and deploying them on AMD development platforms for inference (prediction). The updates bring the tools to the latest version (2024) and add support for CIFAR-10 dataset classification.
 
 The provided scripts are written in Bash and Python and use VART runtime.
 
@@ -51,80 +51,82 @@ The updated tutorial is divided into the following 3 + 1 steps:
 + Compilation of the quantized model to obtain the .xmodel file executable on the DPU accelerator;
 + Deployment of the compiled model on ZCU102 and/or Kria KV260 and execution of the application that handles inference.
 
-This tutorial assumes the user is familiar with Python3, TensorFlow and has some knowledge of machine learning principles.
+Prerequisites:
+
+Familiarity with Python3, TensorFlow, and basic machine learning principles.
 
 
 ## Shell Scripts in this Tutorial
 
-+ ``0_setenv.sh`` : Sets all the necessary environment variables used by the other scripts. You can edit most variables to configure the environment for their own requirements.
++ ``0_setenv.sh`` : Sets necessary environment variables. You can edit most variables to configure the environment for your own requirements. It is recommended to leave CALIB_IMAGES set to 1000 for proper quantization calibration.
 
-It is highly recommended to leave the ``CALIB_IMAGES`` variable set to 1000 because it is the minimum recommended number of images for calibration of the quantization.
++ ``1_train.sh``: Runs training, quantization (``vai_q_tensorflow quantize``) and evaluation of the network, saveing the trained and quantized model as .h5 file.
 
-+ ``1_train.sh``: Runs training, quantization (``vai_q_tensorflow quantize``) and evaluation of the network. It saves the trained and quantized model as .h5 file extension.
++ ``2_compile_kv260.sh``: Compiles the quantized model into a .xmodel file for the Kria KV260 platform using the `vai_c_tensorflow`` command.
 
-+ ``2_compile_kv260.sh``: Launches the ``vai_c_tensorflow`` command to compile the quantized model into a .xmodel file for the Kria KV260 platform.
-+ ``2_compile_zcu102.sh``: Launches the ``vai_c_tensorflow`` command to compile the quantized model into an .xmodel file for the ZCU102 evaluation board.
++ ``2_compile_zcu102.sh``: Compiles the quantized model into a .xmodel file for the ZCU102 evaluation board using the `vai_c_tensorflow`` command.
 
-+ ``3_make target_kv260.sh``: Copies the .xmodel and images to the ``./build/target_kv260`` folder ready for use with the Kria KV260 platform.
-+ ``3_make target_zcu102.sh``: Copies the .xmodel and images to the ``./build/target_zcu102`` folder ready to be copied to the ZCU102 evaluation board's SD card.
++ ``3_make target_kv260.sh``: Copies the .xmodel and images to the ``./build/target_kv260`` folder for use with the Kria KV260 platform.
+
++ ``3_make target_zcu102.sh``: Copies the .xmodel and images to the ``./build/target_zcu102`` folder for use with the ZCU102 evaluation board.
 
 
-## The MNIST and CIFAR-10 Datasets
+## Datasets: MNIST and CIFAR-10 
 
-The MNIST handwritten digits dataset is a publicly available dataset containing 70k 28x28 8-bit grayscale images. The complete dataset of 70k images is divided into 60k images for training and 10k images for validation. The dataset is considered to be the 'hello world' of Machine Learning (ML).
+The MNIST handwritten digits dataset is a publicly available dataset containing 70k 28x28 8-bit grayscale images. The complete dataset of 70k images is divided into 60k images for training and 10k images for validation. It's considered the 'hello world' of Machine Learning.
 
 ![mnist](./files/img/mnist.png?raw=true "Example MNIST images")
 
-The CIFAR-10 dataset is a widely used dataset consisting of 60k 32x32 color images divided into 10 different classes, each of which is represented by 6k images. The dataset is split into 50k training images and 10k test images, providing a comprehensive dataset for training and evaluating ML models. The CIFAR-10 dataset is often used as a benchmark in the field of Computer Vision and ML, making it an excellent resource for both beginners and experienced practitioners.
+The CIFAR-10 dataset is a widely used dataset consisting of 60k 32x32 color images divided into 10 different classes, each of which is represented by 6k images. The dataset is split into 50k training images and 10k test images. Widely used for benchmarking in computer vision and Machine Learning.
 
 ![cifar10](./files/img/cifar10.png?raw=true "Example CIFAR-10 images")
 
 
 ## The Convolution Neural Network
 
-The introduced changes to update the flow include two network architectures, the original architecture used to classify MNIST and an additional slightly more complex architecture to classify CIFAR-10. Both networks are described in the customcnn.py Python script.
+The updated flow includes two network architectures:
+
++ The original architecture for MNIST.
++ A slightly more complex architecture for CIFAR-10.
+
+Both networks are described in the ``customcnn.py`` script.
 
 
 ## Image pre-processing
 
-All images undergo simple pre-processing before being used for training, evaluation, and quantization calibration. The images are normalized to bring all pixel values into the range of 0 to 1 by dividing them by 255.
-
+The images undergo simple pre-processing before being used for training, evaluation, and quantization calibration. All images are normalized to bring pixel values into the range of 0 to 1 by dividing by 255.
 
 ## Setup the host machine
 
-La host machine deve soddisfare svariati requisiti:
+The host machine must meet several requirements:
 
-Ubuntu 20.04 o versioni successive
-Almeno 100GB di spazio libero su disco
-Una versione CPU o GPU del docker di Vitis AI
++ Ubuntu 20.04 or later
++ At least 100GB of free disk space
++ A CPU or GPU version of the Vitis AI docker
 
-Per maggiori informazioni consultare: [Vitis AI Host (Developer) Machine Requirements](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html) e [Host Installation Instructions — Vitis™ AI 3.5 documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/install/install.html).
+NVIDIA GPU (<= CUDA 11.8) is recommended.
 
-È consigliata una GPU, preferenzialmente Nvidia (<= CUDA 11.8) o in alternativa AMD (ROCm), tuttavia, l’intero flusso può essere portato a termine senza.
-
-This tutorial assumes the user is familiar with Python3, TensorFlow and has some knowledge of machine learning principles.
+For detailed system requirements and installation instructions, refer to the [Vitis AI documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
 
 Step 1: Install Docker Engine on Ubuntu
 
-Uninstall all versions :
+1. Uninstall any existing Docker versions:
 
 ```shell
 "for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done"
 ```
 
-Install docker engine using apt repository (or with your favourite method) :
-  
-1. Set up Docker's apt repository.
+2. Set up Docker's apt repository:
 
 ```shell
-# Add Docker's official GPG key:
+# Add Docker's official GPG key
 sudo apt-get update
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# Add the repository to Apt sources:
+# Add the repository to Apt sources
 echo \
 "deb [arch=$(dpkg --print-architecture) \
 signed-by=/etc/apt/keyrings/docker.asc] \
@@ -133,54 +135,54 @@ $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 sudo apt-get update
 ```
 
-2. Install the Docker packages.
+3. Install the Docker packages:
 
 ```shell
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-3. Verify Docker Engine installation.
+4. Verify Docker Engine installation:
 
 ```shell
 sudo docker run hello-world
 ```
 
-Per maggiori informazioni consultare: [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
+For more information, refer to the [Docker installation guide](https://docs.docker.com/engine/install/ubuntu/).
 
 Step 2: Install CUDA
 
-The following steps referred to hosts with NVIDIA GPU, per un installazione cpu-only o ROCm consultare: [Vitis™ AI 3.5 documentation](https://xilinx.github.io/Vitis-AI/3.5/html/index.html).
+The following steps referred to hosts with NVIDIA GPU, for a CPU or ROCm installation refer to the [Vitis AI documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
 
-Per le GPU NVIDIA è necessario installare correttamente i driver NVIDIA e il Toolkit Container:
+For NVIDIA GPUs, ensure NVIDIA drivers and the Container Toolkit are correctly installed:
+
+1. Install NVIDIA drivers:
 
 ```shell
 sudo ubuntu-drivers install
 ```
 
-+ Configure the repository:
+2. Configure the repository:
 
 ```shell
-curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-&& curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list \
-&& \
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 sudo apt-get update
+
 ```
 
-+ Install the NVIDIA Container Toolkit packages:
+3. Install the NVIDIA Container Toolkit packages:
 
 ```shell
 sudo apt-get install -y nvidia-container-toolkit
 ```
 
-+ Verificare l’installazione con il comando nvidia-smi:
+4. Verify the installation with the ``nvidia-smi`` command:
 
 ```shell
 nvidia-smi
 ```
 
-The output should appear similar to the below, indicating the activation of the driver, and the successful installation of CUDA:
+The output should indicate the successful activation of the driver and installation of CUDA. It should appear similar to the below:
 
 ```shell
 Wed Jun 19 12:13:28 2024       
@@ -208,33 +210,25 @@ Wed Jun 19 12:13:28 2024
 +---------------------------------------------------------------------------------------+
 ```
 
-Per maggiori informazioni consultare: [NVIDIA drivers installation | Ubuntu](https://ubuntu.com/server/docs/nvidia-drivers-installation) e [Installing the NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.14.1/install-guide.html).
-
-In alternativa consultare: [1. Introduction — Installation Guide for Linux 12.5 documentation
-](https://docs.nvidia.com/cuda/cuda-installation-guide-linux/).
+For more information, see the [NVIDIA drivers installation guide](https://ubuntu.com/server/docs/nvidia-drivers-installation) and [NVIDIA Container Toolkit installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.14.1/install-guide.html).
 
 
 Step 3: Vitis AI installation
 
-+ Clone the repository :
+1. Clone the Vitis AI repository:
 
 ```shell
 git clone https://github.com/Xilinx/Vitis-AI
 ```
 
-+ Build VITIS AI container:
-
-1. Navigate to the docker subdirectory in the Vitis AI install path:
+2. Build the Vitis AI container:
 
 ```shell
+# Navigate to the docker subdirectory in the Vitis AI install path
 cd <Vitis-AI install path>/Vitis-AI/docker
-```
 
-2. Build the Tensorflow2 GPU container:
-
-```shell
+# Build the Tensorflow2 GPU container
 sudo ./docker_build.sh -t gpu -f tf2
 ```
 
-Per qualsiasi problema e maggiori informazioni consultare: [Vitis™ AI 3.5 documentation
-](https://xilinx.github.io/Vitis-AI/3.5/html/index.html).
+For troubleshooting and more information, refer to the [Vitis AI documentation](https://xilinx.github.io/Vitis-AI/3.5/html/index.html).
