@@ -23,7 +23,7 @@ Updated by Dott.Alessandro Monni, UNISS
 
 <table>
  <tr>
-   <td align="center"><img src="https://www.amd.com/content/dam/amd/en/images/logos/products/2058250-amd-vitis-ai-platform.jpg" width="30%"/><h1>Vitis AI Tutorials</h1>
+   <td align="center"><img src="https://raw.githubusercontent.com/Xilinx/Image-Collateral/main/xilinx-logo.png" width="30%"/><h1>Vitis AI Tutorials</h1>
    </td>
  </tr>
  <tr>
