@@ -62,13 +62,9 @@ Familiarity with Python3, TensorFlow, and basic machine learning principles.
 
 + ``1_train.sh``: Runs training, quantization (``vai_q_tensorflow quantize``) and evaluation of the network, saveing the trained and quantized model as .h5 file.
 
-+ ``2_compile_kv260.sh``: Compiles the quantized model into a .xmodel file for the Kria KV260 platform using the `vai_c_tensorflow`` command.
++ ``2_compile.sh``: Compiles the quantized model into a .xmodel file for the Kria KV260 platform and for the ZCU102 evaluation board using the `vai_c_tensorflow`` command.
 
-+ ``2_compile_zcu102.sh``: Compiles the quantized model into a .xmodel file for the ZCU102 evaluation board using the `vai_c_tensorflow`` command.
-
-+ ``3_make target_kv260.sh``: Copies the .xmodel and images to the ``./build/target_kv260`` folder for use with the Kria KV260 platform.
-
-+ ``3_make target_zcu102.sh``: Copies the .xmodel and images to the ``./build/target_zcu102`` folder for use with the ZCU102 evaluation board.
++ ``3_make target.sh``: Copies the .xmodel and images to the ``./build/target_kv260`` folder and to the ``./build/target_zcu102`` folder for use with the Kria KV260 platform and for use with the ZCU102 evaluation board.
 
 
 ## Datasets: MNIST and CIFAR-10 
