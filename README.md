@@ -380,17 +380,58 @@ $ source ./3_make_target.sh
 ```
 
 
-## Setting UP the SD Card Image for Kria KV260 platform and ZCU102 board
+## Setting UP the SD Card Image for Kria KV260 platform and ZCU102/ZCU104 board
 
---- Work in Progress ---
+In order to be able to perform inference on the platform and boards, it is first necessary to flash the board image onto the SD card. So equip yourself with a SD card and then:
 
-## Running the Application on the Kria KV260 platform and ZCU102 board
+1. Download the Vitis AI pre-built SD card image from the appropriate link:
+
++ [ZCU102](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=xilinx-zcu102-dpu-v2022.2-v3.0.0.img.gz)
++ [ZCU104](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=xilinx-zcu104-dpu-v2022.2-v3.0.0.img.gz)
++ [KV260](https://www.xilinx.com/member/forms/download/design-license-xef.html?filename=xilinx-kv260-dpu-v2022.2-v3.0.0.img.gz)
+
+2. Use BalenaEtcher (or your favourite tool) to flash the downloaded image file into the SD card.
+
+For troubleshooting and more information, refer to the [Quick Start Guide for Zynq™ UltraScale+™](https://xilinx.github.io/Vitis-AI/3.0/html/docs/quickstart/mpsoc.html#setup-the-target).
+
+
+## Running the Application on the Kria KV260 platform and ZCU102/ZCU104 board
 
 The `3_make_target.sh` script copies all the required files for running on the Kria KV260 platform and the ZCU102 board into the `files/build/target_kv260` and `files/build/target_zcu102` folders, respectively. Additionally, it copies the test set images to `files/build/target_kv260/images` and `files/build/target_zcu102/images` - the application code will preprocess and classify these images. The entire target_kv260 folder needs to be copied to the KV260 SD card, and the entire target_zcu102 folder needs to be copied to the ZCU102 SD card.
 
-You can directly copy the entire `files/build/target_zcu102` and `files/build/target_kv260` folders to the `/home/root` folder of the respective flashed SD cards. Connect the flashed SD card to your host machine, and when it is recognized you will see two volumes, BOOT and ROOTFS. Navigate into the ROOTFS and then into the /home folder.  Make the ./root folder writeable by issuing the command ``sudo chmod -R 777 root`` and then copy the entire `files/build/target_zcu102` or `files/build/target_kv260` folder from the host machine to the `/home/root` folder on the respective SD card. Then unmount both the BOOT and ROOTFS volumes from the host machine and then eject the SD Card.
+### Step 1: Copy the files on the SD card
 
-After this step plug the SD card into KV260 platform or ZCU102 board and then connect to the platform/board through UART or SSH connection. You can start the application by navigating into the target_kv260 or target_zcu102 folder (`cd target_zcu102` or `cd target_kv260`) and then issuing the command ``python3 app_mt.py``. The application starts, and after a few seconds, shows the throughput (in frames/sec) and the accuracy:
+You can directly copy the entire `files/build/target_zcu102` and `files/build/target_kv260` folders to the `/home/root` folder of the respective flashed SD cards. Connect the flashed SD card to your host machine, and when it is recognized you will see two volumes, BOOT and ROOTFS. Navigate into the ROOTFS and then into the /home folder. 
+
+Make the ./root folder writeable by issuing the command ``sudo chmod -R 777 root``:
+
+```shell
+sudo chmod -R 777 root
+```
+
+2. Copy the entire `files/build/target_zcu102` or `files/build/target_kv260` folder from the host machine to the `/home/root` folder on the respective SD card.
+
+3. Then unmount both the BOOT and ROOTFS volumes from the host machine and then eject the SD Card.
+
+
+### Step 2: Connect the Kria KV260 platform/board tthrough UART or SSH connection
+
+In this section we will look at connecting to the platform through a serial connection via UART. Equip yourself with a serial client such as Putty or Tera Term.
+
+Connect the platform/board to the host machine and get the name of the `serial line` to which it is connected.
+For linux host machines, the device is identified by something like ``/dev/ttyUSB0``. For windows host machines, the device is identified by something like ``COM3/4/5/6``.
+
+Open your serial client, select `serial connection` and use the following connection parameters:
+
++ Serial line: `<serial line name>`
++ Baud Rate: 115200
++ Data Bits: 8
++ Stop Bit: 1
++ Parity Bit: No
+
+### Step 3: Launch the application 
+
+After these step plug the SD card into KV260 platform or ZCU102/ZCU104 board and turn on the device. After the SO booting and logging in (where required) you can start the application by navigating into the target_kv260 or target_zcu102 folder (`cd target_zcu102` or `cd target_kv260`) and then issuing the command ``python3 app_mt.py``. The application starts, and after a few seconds, shows the throughput (in frames/sec) and the accuracy:
 
 ```shell
 root@xilinx-zcu102-2021_1:~ cd target_zcu102
