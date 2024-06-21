@@ -379,9 +379,14 @@ $ source ./2_compile.sh
 $ source ./3_make_target.sh
 ```
 
+
+## Setting UP the SD Card Image for Kria KV260 platform and ZCU102 board
+
+--- Work in Progress ---
+
 ## Running the Application on the Kria KV260 platform and ZCU102 board
 
-The `7_make_target.sh` script copies all the required files for running on the Kria KV260 platform and the ZCU102 board into the `files/build/target_kv260` and `files/build/target_zcu102` folders, respectively. Additionally, it copies the test set images to `files/build/target_kv260/images` and `files/build/target_zcu102/images` - the application code will preprocess and classify these images. The entire target_kv260 folder needs to be copied to the KV260 SD card, and the entire target_zcu102 folder needs to be copied to the ZCU102 SD card.
+The `3_make_target.sh` script copies all the required files for running on the Kria KV260 platform and the ZCU102 board into the `files/build/target_kv260` and `files/build/target_zcu102` folders, respectively. Additionally, it copies the test set images to `files/build/target_kv260/images` and `files/build/target_zcu102/images` - the application code will preprocess and classify these images. The entire target_kv260 folder needs to be copied to the KV260 SD card, and the entire target_zcu102 folder needs to be copied to the ZCU102 SD card.
 
 You can directly copy the entire `files/build/target_zcu102` and `files/build/target_kv260` folders to the `/home/root` folder of the respective flashed SD cards. Connect the flashed SD card to your host machine, and when it is recognized you will see two volumes, BOOT and ROOTFS. Navigate into the ROOTFS and then into the /home folder.  Make the ./root folder writeable by issuing the command ``sudo chmod -R 777 root`` and then copy the entire `files/build/target_zcu102` or `files/build/target_kv260` folder from the host machine to the `/home/root` folder on the respective SD card. Then unmount both the BOOT and ROOTFS volumes from the host machine and then eject the SD Card.
 
