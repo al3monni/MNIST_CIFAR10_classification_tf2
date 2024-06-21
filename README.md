@@ -322,16 +322,55 @@ Open terminal, cd into the ``repository`` folder, then into the ``files`` folder
 cd <path_to_tutorial>/files
 
 # to start GPU docker
-./docker_run.sh xilinx/vitis-ai-gpu:latest
+./docker_run.sh xilinx/vitis-ai-tensorflow2-gpu:3.5.0.001-b2b227921
 ```
 
-The docker container will start and you should see something like this in the terminal:
+The docker container will start and after accepting the terms of use, you should see something like this in the terminal:
 
 ```shell
-INSERT OUTPUT HERE
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.8.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Setting up user 's environment in the Docker container...
+usermod: no changes
+Running as vitis-ai-user with ID 0 and group 0 
+
+
+==========================================
+ 
+__      ___ _   _                   _____
+\ \    / (_) | (_)            /\   |_   _|
+ \ \  / / _| |_ _ ___ ______ /  \    | |
+  \ \/ / | | __| / __|______/ /\ \   | |
+   \  /  | | |_| \__ \     / ____ \ _| |_
+    \/   |_|\__|_|___/    /_/    \_\_____|
+ 
+==========================================
+
+Docker Image Version: latest   (GPU) 
+Vitis AI Git Hash: b2b227921 
+Build Date: 2024-03-27
+WorkFlow: tf2
+
+vitis-ai-user@user:/workspace$ 
 ```
 
 The complete tools flow can be run just by executing the `source run_all.sh` command, or by running each of the steps in order (from `0_setenv.sh` to `3_make_target.sh`):
+
+```shell
+$ source run_all.sh
+```
 
 ```shell
 $ source ./0_setenv.sh
