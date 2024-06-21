@@ -100,7 +100,7 @@ The host machine must meet several requirements:
 + At least 100GB of free disk space
 + A CPU or GPU version of the Vitis AI™ docker
 
-NVIDIA GPU (<= CUDA 11.8) is recommended.
+NVIDIA GPU (>= CUDA 11.8) is recommended.
 
 For detailed system requirements and installation instructions, refer to the [Vitis AI™ documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
 
@@ -226,6 +226,83 @@ cd <Vitis-AI install path>/Vitis-AI/docker
 # Build the Tensorflow2 GPU container
 sudo ./docker_build.sh -t gpu -f tf2
 ```
+
+3. Check if the GPU is visible by the Docker:
+
+```shell
+docker run --gpus all nvidia/cuda:11.3.1-cudnn8-runtime-ubuntu20.04 nvidia-smi
+```
+
+This should result in an output similar to the below:
+
+```shell
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.3.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Fri Jun 21 13:18:50 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.171.04             Driver Version: 535.171.04   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  Quadro P2200                   Off | 00000000:01:00.0  On |                  N/A |
+| 50%   40C    P5               9W /  75W |    549MiB /  5120MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
++---------------------------------------------------------------------------------------+
+```
+
+4. Chech the Vitis AI™ docker details:
+
+```shell
+docker images
+```
+
+The output should look like this:
+
+```shell
+REPOSITORY                        TAG                                 IMAGE ID       CREATED         SIZE
+xilinx/vitis-ai-tensorflow2-gpu   3.5.0.001-b2b227921                 c3f565e38e20   2 months ago    20.1GB
+xilinx/vitis-ai-tensorflow-gpu    3.5.0.001-b2b227921                 3042198ffe2a   3 months ago    17.3GB
+xilinx/vitis-ai-gpu-tf2-base      latest                              51b75e074a75   3 months ago    12.2GB
+nvidia/cuda                       11.3.1-cudnn8-runtime-ubuntu20.04   dbafb7783f59   7 months ago    3.3GB
+xilinx/vitis-ai-tensorflow-cpu    latest                              9d8d014a5e88   12 months ago   7.06GB
+hello-world                       latest                              9c7a54a9a43c   13 months ago   13.3kB
+```
+
+Note the name of the repository and its tag.
+
+5. Finally start the Vitis AI™ docker:
+
+```shell
+# Navigate to the docker subdirectory in the Vitis AI install path
+cd <Vitis-AI install path>/Vitis-AI
+
+#Launch the docker
+./docker_run.sh xilinx/vitis-ai-tensorflow2-gpu:3.5.0.001-b2b227921
+```
+
+You must substiture the name of the image (``vitis-ai-tensorflow2-gpu``) and its tag (``3.5.0.001-b2b227921``) with the data noted in the previous step.
+
 
 For troubleshooting and more information, refer to the [Vitis AI documentation](https://xilinx.github.io/Vitis-AI/3.5/html/index.html).
 
