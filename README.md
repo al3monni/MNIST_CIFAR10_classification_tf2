@@ -104,7 +104,7 @@ NVIDIA GPU (>= CUDA 11.8) is recommended.
 
 For detailed system requirements and installation instructions, refer to the [Vitis AI™ documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
 
-Step 1: Install Docker Engine on Ubuntu
+### Step 1: Install Docker Engine on Ubuntu
 
 1. Uninstall any existing Docker versions:
 
@@ -145,7 +145,7 @@ sudo docker run hello-world
 
 For more information, refer to the [Docker installation guide](https://docs.docker.com/engine/install/ubuntu/).
 
-Step 2: Install CUDA
+### Step 2: Install CUDA
 
 The following steps referred to hosts with NVIDIA GPU, for a CPU or ROCm installation refer to the [Vitis AI™ documentation](https://xilinx.github.io/Vitis-AI/3.5/html/docs/reference/system_requirements.html).
 
@@ -209,7 +209,7 @@ Wed Jun 19 12:13:28 2024
 For more information, see the [NVIDIA drivers installation guide](https://ubuntu.com/server/docs/nvidia-drivers-installation) and [NVIDIA Container Toolkit installation guide](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.14.1/install-guide.html).
 
 
-Step 3: Vitis AI installation
+### Step 3: Vitis AI installation
 
 1. Clone the Vitis AI™ repository:
 
