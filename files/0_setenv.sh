@@ -51,8 +51,8 @@ export COMP_LOG_ZCU102=compile_zcu102.log
 
 #---------TRAINING-PARAMETERS-------------
 
-export EPOCHS=10       #100
-export BATCHSIZE=64    #64
+export EPOCHS=10
+export BATCHSIZE=64
 
 #-------------GPU-PARAMETERS--------------
 
@@ -63,9 +63,9 @@ export TF_FORCE_GPU_ALLOW_GROWTH=true
 
 #-----------NETWORK-PARAMETERS------------
 
-export INPUT_HEIGHT=28  #32	#CIFAR10 height
-export INPUT_WIDTH=28   #32 #CIFAR10 width
-export INPUT_CHAN=1     #3  #CIFAR10 chan
+export INPUT_HEIGHT=28   #MNIST height  #32	#CIFAR10 height
+export INPUT_WIDTH=28    #MNIST width   #32 #CIFAR10 width
+export INPUT_CHAN=1      #MNIST chan    #3  #CIFAR10 chan
 
 export NET_NAME=customcnn
 
