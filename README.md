@@ -431,7 +431,7 @@ Open your serial client, select `serial connection` and use the following connec
 
 ### Step 3: Launch the application 
 
-After these step plug the SD card into KV260 platform or ZCU102/ZCU104 board and turn on the device. After the SO booting and logging in (where required) you can start the application by navigating into the target_kv260 or target_zcu102 folder (`cd target_zcu102` or `cd target_kv260`) and then issuing the command ``python3 app_mt.py``. The application starts, and after a few seconds, shows the throughput (in frames/sec) and the accuracy:
+After these step plug the SD card into KV260 platform or ZCU102 board and turn on the device. After the SO booting and logging in (where required) you can start the application by navigating into the target_kv260 or target_zcu102 folder (`cd target_kv260` or `cd target_zcu102`) and then issuing the command ``python3 app_mt.py``. The application starts, and after a few seconds, shows the throughput (in frames/sec) and the accuracy:
 
 ```shell
 root@xilinx-zcu102-2021_1:~ cd target_zcu102
