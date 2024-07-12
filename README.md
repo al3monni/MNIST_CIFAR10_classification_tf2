@@ -40,7 +40,7 @@ Updated by Dott.Alessandro Monni, UNISS
 
 ## Introduction
 
-This repository update of the official [AMD Vitis AI™ tutorial](https://github.com/Xilinx/Vitis-AI-Tutorials/blob/1.4/Design_Tutorials/02-MNIST_classification_tf) that guides users through the Vitis AI™ development flow (using Tensorflow), accelerating convolutional neural networks (CNNs) and deploying them on AMD development platforms for inference (prediction). The updates bring the tools to the latest version (2024) and add support for CIFAR-10 dataset classification.
+This repository update of the official [AMD Vitis AI™ tutorial](https://github.com/Xilinx/Vitis-AI-Tutorials/blob/1.4/Design_Tutorials/02-MNIST_classification_tf) that guides users through the Vitis AI™ development flow (using Tensorflow), accelerating convolutional neural networks (CNNs) and deploying them on AMD development platforms for inference (prediction). The updates bring the tools to the latest version (first half of 2024) and add support for CIFAR-10 dataset classification.
 
 The provided scripts are written in Bash and Python and use VART runtime.
 
