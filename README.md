@@ -395,7 +395,7 @@ In order to be able to perform inference on the platform and boards, it is first
 For troubleshooting and more information, refer to the [Quick Start Guide for Zynq™ UltraScale+™](https://xilinx.github.io/Vitis-AI/3.0/html/docs/quickstart/mpsoc.html#setup-the-target).
 
 
-## Running the Application on the Kria KV260 platform and ZCU102board
+## Running the Application on the Kria KV260 platform and ZCU102 board
 
 The `3_make_target.sh` script copies all the required files for running on the Kria KV260 platform and the ZCU102 board into the `files/build/target_kv260` and `files/build/target_zcu102` folders, respectively. Additionally, it copies the test set images to `files/build/target_kv260/images` and `files/build/target_zcu102/images` - the application code will preprocess and classify these images. The entire target_kv260 folder needs to be copied to the KV260 SD card, and the entire target_zcu102 folder needs to be copied to the ZCU102 SD card.
 
