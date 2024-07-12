@@ -20,6 +20,7 @@
 ARCH_KV260=/opt/vitis_ai/compiler/arch/DPUCZDX8G/KV260/arch.json
 ARCH_ZCU102=/opt/vitis_ai/compiler/arch/DPUCZDX8G/ZCU102/arch.json
 
+#compile for kria KV260, comment this function if you don't need the kria support to dont't waste time
 compile() {
   vai_c_tensorflow2 \
     --model       ${BUILD}/${QUANT_MODEL_FILENAME} \
@@ -28,6 +29,7 @@ compile() {
     --net_name    ${NET_NAME}
 }
 
+#compile for ZCU102,  comment this function if you don't need the zcu support to dont't waste time
 compile() {
   vai_c_tensorflow2 \
     --model       ${BUILD}/${QUANT_MODEL_FILENAME} \
@@ -40,10 +42,12 @@ echo -e "\n-----------------------------------------"
 echo    " COMPILING PHASE STARTED.."
 echo    "-----------------------------------------"
 
+#compile for kria KV260, comment this function if you don't need the kria support to dont't waste time
 rm -rf ${COMPILE_KV260}
 mkdir -p ${COMPILE_KV260}
 compile 2>&1 | tee ${LOG}/${COMP_LOG_KV260}
 
+#compile for ZCU102,  comment this function if you don't need the zcu support to dont't waste time
 rm -rf ${COMPILE_ZCU102}
 mkdir -p ${COMPILE_ZCU102}
 compile 2>&1 | tee ${LOG}/${COMP_LOG_ZCU102}
