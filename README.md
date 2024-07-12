@@ -414,7 +414,7 @@ sudo chmod -R 777 root
 3. Then unmount both the BOOT and ROOTFS volumes from the host machine and then eject the SD Card.
 
 
-### Step 2: Connect the Kria KV260 platform/board tthrough UART or SSH connection
+### Step 2: Connect the Kria KV260 platform/board through UART or SSH connection
 
 In this section we will look at connecting to the platform through a serial connection via UART. Equip yourself with a serial client such as Putty or Tera Term.
 
